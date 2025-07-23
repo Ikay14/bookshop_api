@@ -1,0 +1,649 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "App"
+        ]
+      }
+    },
+    "/auth/google": {
+      "get": {
+        "operationId": "AuthController_googleLogin",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Redirect to Google OAuth"
+          }
+        },
+        "summary": "Google OAuth login",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/google/redirect": {
+      "get": {
+        "operationId": "AuthController_googleRedirect",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Handle Google OAuth redirect"
+          }
+        },
+        "summary": "Google OAuth redirect",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "operationId": "AuthController_registerUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User registered"
+          }
+        },
+        "summary": "Register a new user",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_loginUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User logged in"
+          }
+        },
+        "summary": "Login a user",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/books/create": {
+      "post": {
+        "operationId": "BooksController_creatBook",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Book created"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a new book",
+        "tags": [
+          "books"
+        ]
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "operationId": "BooksController_getBookById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Book ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a book by ID",
+        "tags": [
+          "books"
+        ]
+      }
+    },
+    "/books": {
+      "get": {
+        "operationId": "BooksController_filterBooks",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "filter",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Books found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Filter books",
+        "tags": [
+          "books"
+        ]
+      }
+    },
+    "/books/update": {
+      "patch": {
+        "operationId": "BooksController_updateBook",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatedBookDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Book updated"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a book",
+        "tags": [
+          "books"
+        ]
+      }
+    },
+    "/books/delete": {
+      "delete": {
+        "operationId": "BooksController_deleteBook",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteBookDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Book deleted"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a book",
+        "tags": [
+          "books"
+        ]
+      }
+    },
+    "/users/follow": {
+      "post": {
+        "operationId": "UsersController_followAUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FollowDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User followed"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Follow a user",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/users/unfollow": {
+      "delete": {
+        "operationId": "UsersController_unFollow",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FollowDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User unfollowed"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Unfollow a user",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/users/{id}/getFollowers": {
+      "get": {
+        "operationId": "UsersController_getFollowers",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of followers"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get followers of a user",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/users/{id}/getFollowing": {
+      "get": {
+        "operationId": "UsersController_getFollowing",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "User ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of followings"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get users followed by a user",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/book/comment": {
+      "post": {
+        "operationId": "CommentsController_addComment",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCommentDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Comment added"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add a comment to a book",
+        "tags": [
+          "comments"
+        ]
+      }
+    },
+    "/book/comment/{id}": {
+      "get": {
+        "operationId": "CommentsController_getComment",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Book ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book comments"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get comments for a book",
+        "tags": [
+          "comments"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Book API",
+    "description": "The API documentation",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "RegisterUserDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User password"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "First name"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Last name"
+          },
+          "picture": {
+            "type": "string",
+            "description": "Profile picture URL"
+          },
+          "provider": {
+            "type": "string",
+            "description": "OAuth provider"
+          }
+        },
+        "required": [
+          "email",
+          "password",
+          "firstName",
+          "lastName"
+        ]
+      },
+      "LoginDTO": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User password"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "CreateBookDTO": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the book"
+          },
+          "price": {
+            "type": "number",
+            "description": "Price of the book"
+          },
+          "author": {
+            "type": "string",
+            "description": "Author of the book"
+          },
+          "bio": {
+            "type": "string",
+            "description": "Bio of the book"
+          },
+          "publisher": {
+            "type": "string",
+            "description": "Publisher of the book"
+          }
+        },
+        "required": [
+          "title",
+          "price",
+          "author",
+          "bio",
+          "publisher"
+        ]
+      },
+      "UpdatedBookDTO": {
+        "type": "object",
+        "properties": {
+          "review": {
+            "type": "string",
+            "description": "Review for the book"
+          },
+          "bookId": {
+            "type": "string",
+            "description": "Book ID"
+          },
+          "authorId": {
+            "type": "string",
+            "description": "Author ID"
+          }
+        },
+        "required": [
+          "review",
+          "bookId",
+          "authorId"
+        ]
+      },
+      "DeleteBookDto": {
+        "type": "object",
+        "properties": {
+          "author_id": {
+            "type": "string",
+            "description": "Author ID"
+          },
+          "bookId": {
+            "type": "string",
+            "description": "Book ID"
+          }
+        },
+        "required": [
+          "author_id",
+          "bookId"
+        ]
+      },
+      "FollowDTO": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "ID of the user performing the follow/unfollow"
+          },
+          "targetId": {
+            "type": "string",
+            "description": "ID of the user to be followed/unfollowed"
+          }
+        },
+        "required": [
+          "userId",
+          "targetId"
+        ]
+      },
+      "AddCommentDTO": {
+        "type": "object",
+        "properties": {
+          "bookId": {
+            "type": "string",
+            "description": "Book ID"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User ID"
+          },
+          "content": {
+            "type": "string",
+            "description": "Comment content"
+          }
+        },
+        "required": [
+          "bookId",
+          "userId",
+          "content"
+        ]
+      }
+    }
+  }
+}
