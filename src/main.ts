@@ -24,7 +24,8 @@ async function bootstrap() {
   const config = new DocumentBuilder()
    .setTitle('Book API')
    .setDescription('The API documentation')
-   .setVersion('1.0')   
+   .setVersion('1.0')
+   .addServer(`${process.env.BASE_URL || 'http://localhost:3001'}/api/v1`)
    .addBearerAuth()
    .build();  
 
