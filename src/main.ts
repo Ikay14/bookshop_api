@@ -66,7 +66,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  const port = app.get<ConfigService>(ConfigService).get<number>('server.port') ?? 5100;
+  const port = app.get<ConfigService>(ConfigService).get<number>('server.port') ?? 3002;
 
   await app.listen(port); 
   console.log(`Swagger is running at http://localhost:${port}/api/docs`);
